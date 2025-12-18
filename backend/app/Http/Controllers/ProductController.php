@@ -37,7 +37,7 @@ class ProductController extends Controller
                 'message' => 'El producto no ha sido encontrado.'
             ];
 
-            return response()->json($data, 400);
+            return response()->json($data, 404);
         }
         
         $data = [
@@ -93,7 +93,7 @@ class ProductController extends Controller
 
         return response()->json($data, 201);
     }
-
+    
     public function editarProducto(Request $request, $id)
     {
         $producto = Productos::find($id);
@@ -103,7 +103,7 @@ class ProductController extends Controller
                 'message' => 'El producto no existe'
             ];
 
-            return response()->json($data, 400);
+            return response()->json($data, 404);
         }
 
         $validator = Validator::make($request->all(), [
@@ -160,7 +160,7 @@ class ProductController extends Controller
                 'message' => 'No se ha encontrado el producto'
             ];
 
-            return response()->json($data, 400);
+            return response()->json($data, 404);
         }
 
         $producto->delete();
