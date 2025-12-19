@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\FavoritosController;
 use App\Http\Controllers\ProductController;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,6 @@ Route::put('/categorias/{id}', [CategoriaController::class, 'editarCategorias'])
 Route::delete('/categorias/{id}', [CategoriaController::class, 'eliminarCategorias']);
 
 // RUTAS PARA FAVORITOS
+Route::get('/favoritos', [FavoritosController::class, 'verFavoritos']);
+Route::post('/favoritos', [FavoritosController::class, 'agregarFavoritos']);
+Route::delete('/favoritos/{id}',[FavoritosController::class, 'eliminarFavoritos']);
