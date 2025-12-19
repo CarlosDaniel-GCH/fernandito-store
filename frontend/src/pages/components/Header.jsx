@@ -1,14 +1,16 @@
+import { Link } from 'react-router-dom';
+
 function Header(){
     return(
         <header className="w-full bg-white border-b border-gray-200 p-4 md:px-16 font-sans">
             <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
                 
                 {/* Lado Izquierdo: Logo y Menú */}
-                <div className="flex items-center gap-6 flex-shrink-0">
+                <Link to="/" className="flex items-center gap-6 flex-shrink-0" title='Ir a Inicio'>
                     <div className="text-[#add600] text-3xl font-bold tracking-tighter cursor-pointer">
                         fernanditostore<span className="text-[#add600]">.com</span>
                     </div>
-                </div>
+                </Link>
 
                 {/* Barra de búsqueda */}
                 <div className="flex-grow max-w-2xl relative flex items-center">
@@ -26,25 +28,27 @@ function Header(){
                     </button>
                 </div>
 
-                {/* Favoritos y Carrito */}
                 <div className="flex items-center gap-3 text-[#333333] flex-shrink-0">
+                    {/* Icono Productos (Cuadrícula) */}
+                    <Link 
+                        to="/categorias" 
+                        className="p-2 hover:bg-gray-50 rounded-full transition-colors flex items-center justify-center"
+                        title="Ver Categorías"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </Link>
 
                     {/* Icono Favoritos (Corazón) */}
-                    <button className="p-2 hover:bg-gray-50 rounded-full transition-colors">
+                    <Link to="/favoritos" className="p-2 hover:bg-gray-50 rounded-full transition-colors" title='Ver Favoritos'>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
-                    </button>
-
-                    {/* Carrito con Contador */}
-                    <button className="relative p-2 hover:bg-gray-50 rounded-full transition-colors ml-1">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
-                    </button>
-
+                    </Link>
                 </div>
             </div>
         </header>

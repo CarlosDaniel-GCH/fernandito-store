@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 function Promociones(){
@@ -80,9 +81,9 @@ function Promociones(){
             {/* Overlay de texto superior */}
             <div className="absolute top-8 left-8 z-10">
               <button className="flex items-center gap-2 text-white group-hover:translate-x-2 transition-transform duration-300">
-                <span className="text-lg md:text-xl font-bold tracking-[0.2em] drop-shadow-md">
+                <Link to="/categorias" className="text-lg md:text-xl font-bold tracking-[0.2em] drop-shadow-md" title="Ver productos">
                   {promo.titulo}
-                </span>
+                </Link>
                 {/* Ícono de flecha circular */}
                 <div className="border-2 border-white rounded-full p-1">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">

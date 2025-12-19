@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 function HoldingBanner(){
@@ -50,9 +51,9 @@ function HoldingBanner(){
                 <p className="text-xs font-semibold text-gray-500 tracking-widest uppercase mb-1">
                   {cat.tag}
                 </p>
-                <h3 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight">
+                <Link to="/categorias" className="text-2xl md:text-3xl font-black text-gray-900 leading-tight" title='Ver Productos'>
                   {cat.title}
-                </h3>
+                </Link>
                 {/* Línea decorativa que crece al hacer hover */}
                 <div className="w-8 h-1 bg-[#add600] mt-2 group-hover:w-16 transition-all duration-300"></div>
               </div>

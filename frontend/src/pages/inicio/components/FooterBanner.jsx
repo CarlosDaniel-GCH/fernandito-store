@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 function FooterBanner() {
@@ -42,14 +43,14 @@ function FooterBanner() {
 
         {/* Sección Derecha: Botón de Acción */}
         <div className="absolute right-8 flex items-center gap-2">
-          <button className="bg-[#f3f3f3] text-[#333333] px-8 py-3 rounded-full font-bold text-sm md:text-base hover:bg-white transition-all shadow-md flex items-center gap-4 group">
+          <Link to="/categorias" className="bg-[#f3f3f3] text-[#333333] px-8 py-3 rounded-full font-bold text-sm md:text-base hover:bg-white transition-all shadow-md flex items-center gap-4 group" title="Ver Productos">
             ¡Ir a productos!
             <div className="bg-[#333333] text-white rounded-full w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m9 18 6-6-6-6"/>
               </svg>
             </div>
-          </button>
+          </Link>
         </div>
 
         {/* Elementos Decorativos: Copos de Nieve */}
