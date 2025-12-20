@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { getFavoritos } from '../service/favoritoService';
 import { getProducts } from '../../categorias/service/productoService';
+import { eliminarFavoritos } from '../service/eliminarFavoritos';
 
 function Favoritos(){
     const [productos, setProducts] = useState([]);
@@ -29,9 +30,16 @@ function Favoritos(){
 
     if(loading) return <div className="flex justify-center p-10 font-bold">Cargando favoritos...</div>
 
-    const productosFavoritos = productos.filter(producto =>
-        favoritos.some(fav => fav.id_producto === producto.id)
-    );
+    const productosFavoritos = productos.map(producto => {
+        const fav = favoritos.find(f => f.id_producto === producto.id);
+
+        if (fav) {
+            return { ...producto, id_favorito: fav.id };
+        }
+
+        return null;
+    })
+    .filter(Boolean);
 
     return(
         <div className="max-w-[1440px] mx-auto p-6">
@@ -55,7 +63,7 @@ function Favoritos(){
                             <h3 className="text-gray-800 uppercase text-sm">{productos.descripcion}</h3>
                             <p className="text-gray-800 line-through text-md mt-3">S/ {productos.precio_original}</p>
                             <p className="text-red-500 font-bold text-md">S/ {productos.precio_actual}</p>
-                            <button className="w-full mt-4 bg-[#add600] text-white py-2 rounded-full font-bold text-xs transition-colors uppercase">
+                            <button onClick={() => {eliminarFavoritos(productos.id_favorito)}} className="w-full mt-4 bg-[#add600] text-white py-2 rounded-full font-bold text-xs transition-colors uppercase">
                                 Eliminar de favoritos
                             </button>
                         </div>
