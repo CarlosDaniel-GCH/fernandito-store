@@ -1,21 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import { getFavoritos } from '../service/favoritoService';
+import { getProducts } from '../../categorias/service/productoService';
 
 function Favoritos(){
+    const [productos, setProducts] = useState([]);
     const [favoritos, setFavoritos] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchFavoritos = () => {
+        const fetchData = async() => {
             try{
-                const data = getFavoritos();
+                const favoritosList = await getFavoritos();
+                const productosList = await getProducts();
 
-                if(data && data.favoritos){
-                    setFavoritos(data.favoritos);
-                }
-                else{
-                    setFavoritos(data);
-                }
+                setFavoritos(favoritosList.favoritos);
+                setProducts(productosList.productos);
             }
             catch(error){
                 console.log("Error:", error);
@@ -25,35 +24,39 @@ function Favoritos(){
             }
         };
 
-        fetchFavoritos();
+        fetchData();
     }, []);
 
     if(loading) return <div className="flex justify-center p-10 font-bold">Cargando favoritos...</div>
 
+    const productosFavoritos = productos.filter(producto =>
+        favoritos.some(fav => fav.id_producto === producto.id)
+    );
+
     return(
         <div className="max-w-[1440px] mx-auto p-6">
             <h1 className="text-3xl font-black mb-8 border-b-4 border-[#add600] inline-block">
-                FAVORITOS
+                MIS FAVORITOS
             </h1>
 
             {/* Grid para mostrar los productos */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {favoritos.length > 0 ? (
-                    favoritos.map((item) => (
-                        <div key={item.id} className="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow group">
+                {productosFavoritos.length > 0 ? (
+                    productosFavoritos.map((productos) => (
+                        <div key={productos.id} className="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow group">
                             <div className="relative overflow-hidden rounded-md mb-4 h-64 bg-gray-100">
                                 <img 
-                                    src={item.imagen} 
-                                    alt={item.nombre} 
+                                    src={productos.imagen}
+                                    alt={productos.nombre} 
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
                                 />
                             </div>
-                            <h3 className="text-gray-800 font-bold uppercase text-sm">{item.nombre}</h3>
-                            <h3 className="text-gray-800 uppercase text-sm">{item.descripcion}</h3>
-                            <p className="text-gray-800 line-through text-md mt-3">S/ {item.precio_original}</p>
-                            <p className="text-red-500 font-bold text-md">S/ {item.precio_actual}</p>
+                            <h3 className="text-gray-800 font-bold uppercase text-sm">{productos.nombre}</h3>
+                            <h3 className="text-gray-800 uppercase text-sm">{productos.descripcion}</h3>
+                            <p className="text-gray-800 line-through text-md mt-3">S/ {productos.precio_original}</p>
+                            <p className="text-red-500 font-bold text-md">S/ {productos.precio_actual}</p>
                             <button className="w-full mt-4 bg-[#add600] text-white py-2 rounded-full font-bold text-xs transition-colors uppercase">
-                                Agregar a favoritos
+                                Eliminar de favoritos
                             </button>
                         </div>
                     ))

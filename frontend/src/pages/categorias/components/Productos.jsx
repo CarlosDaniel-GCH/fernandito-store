@@ -9,13 +9,9 @@ const Categorias = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const data = await getProducts();
+                const productosList = await getProducts();
                 
-                if (data && data.productos) {
-                    setProducts(data.productos);
-                } else {
-                    setProducts(data);
-                }
+                setProducts(productosList.productos);
             } catch (error) {
                 console.error("Error al cargar los productos en el componente", error);
             } finally {
