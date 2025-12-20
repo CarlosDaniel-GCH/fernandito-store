@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { getProducts } from '../service/productoService';
-import { addFavoritos } from '../service/addFavoritos';
+import React, {useState, useEffect} from 'react';
+import { getFavoritos } from '../service/favoritoService';
 
-const Categorias = () => {
-    const [products, setProducts] = useState([]);
+function Favoritos(){
+    const [favoritos, setFavoritos] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const data = await getProducts();
-                
-                if (data && data.productos) {
-                    setProducts(data.productos);
-                } else {
-                    setProducts(data);
+        const fetchFavoritos = () => {
+            try{
+                const data = getFavoritos();
+
+                if(data && data.favoritos){
+                    setFavoritos(data.favoritos);
                 }
-            } catch (error) {
-                console.error("Error al cargar los productos en el componente", error);
-            } finally {
+                else{
+                    setFavoritos(data);
+                }
+            }
+            catch(error){
+                console.log("Error:", error);
+            }
+            finally{
                 setLoading(false);
             }
         };
 
-        fetchProducts();
+        fetchFavoritos();
     }, []);
 
-    if (loading) {
-        return <div className="flex justify-center p-10 font-bold">Cargando productos...</div>;
-    }
+    if(loading) return <div className="flex justify-center p-10 font-bold">Cargando favoritos...</div>
 
-    return (
+    return(
         <div className="max-w-[1440px] mx-auto p-6">
             <h1 className="text-3xl font-black mb-8 border-b-4 border-[#add600] inline-block">
-                CATEGORÍAS
+                FAVORITOS
             </h1>
 
             {/* Grid para mostrar los productos */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {products.length > 0 ? (
-                    products.map((item) => (
+                {favoritos.length > 0 ? (
+                    favoritos.map((item) => (
                         <div key={item.id} className="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow group">
                             <div className="relative overflow-hidden rounded-md mb-4 h-64 bg-gray-100">
                                 <img 
@@ -52,7 +52,7 @@ const Categorias = () => {
                             <h3 className="text-gray-800 uppercase text-sm">{item.descripcion}</h3>
                             <p className="text-gray-800 line-through text-md mt-3">S/ {item.precio_original}</p>
                             <p className="text-red-500 font-bold text-md">S/ {item.precio_actual}</p>
-                            <button onClick={() => {addFavoritos(item.id)}} className="w-full mt-4 bg-[#add600] text-white py-2 rounded-full font-bold text-xs transition-colors uppercase">
+                            <button className="w-full mt-4 bg-[#add600] text-white py-2 rounded-full font-bold text-xs transition-colors uppercase">
                                 Agregar a favoritos
                             </button>
                         </div>
@@ -62,7 +62,7 @@ const Categorias = () => {
                 )}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Categorias;
+export default Favoritos
