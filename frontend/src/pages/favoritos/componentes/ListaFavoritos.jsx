@@ -94,7 +94,7 @@ function Favoritos(){
                         </div>
                     ))
                 ) : (
-                    <p className="col-span-full text-center text-gray-500">No se encontraron productos.</p>
+                    <p className="col-span-full py-[50px] text-center text-gray-500">No se encontraron productos.</p>
                 )}
             </div>
         </div>
