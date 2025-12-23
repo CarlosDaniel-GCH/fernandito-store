@@ -5,6 +5,7 @@ import { addFavoritos } from '../service/addFavoritos';
 const Categorias = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [mensajeAgregado, setMensajeAgregado] = useState('');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -26,11 +27,32 @@ const Categorias = () => {
         return <div className="flex justify-center p-10 font-bold">Cargando productos...</div>;
     }
 
+    const handleAgregarFavoritos = async (idProducto) => {
+        try {
+            await addFavoritos(idProducto);
+
+            setMensajeAgregado('Producto agregado a favoritos');
+
+            setTimeout(() => {
+                setMensajeAgregado('');
+            }, 2000);
+        } catch (error) {
+            console.error("Error al agregar el producto a favoritos:", error);
+        }
+    };
+
     return (
         <div className="max-w-[1440px] mx-auto p-6">
             <h1 className="text-3xl font-black mb-8 border-b-4 border-[#add600] inline-block">
                 CATEGORÍAS
             </h1>
+
+            {/* Mensaje*/}
+            {mensajeAgregado && (
+                <div className="fixed bottom-6 right-6 bg-white text-zinc-800 border-l-4 border-[#add600] p-4 rounded-lg shadow-lg transform transition-transform duration-300 ease-in-out opacity-90">
+                    {mensajeAgregado}
+                </div>
+            )}
 
             {/* Grid para mostrar los productos */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -48,7 +70,7 @@ const Categorias = () => {
                             <h3 className="text-gray-800 uppercase text-sm">{item.descripcion}</h3>
                             <p className="text-gray-800 line-through text-md mt-3">S/ {item.precio_original}</p>
                             <p className="text-red-500 font-bold text-md">S/ {item.precio_actual}</p>
-                            <button onClick={() => {addFavoritos(item.id)}} className="w-full mt-4 bg-[#add600] text-white py-2 rounded-full font-bold text-xs transition-colors uppercase">
+                            <button onClick={() => handleAgregarFavoritos(item.id)} className="w-full mt-4 bg-[#add600] text-white py-2 rounded-full font-bold text-xs transition-colors uppercase">
                                 Agregar a favoritos
                             </button>
                         </div>
