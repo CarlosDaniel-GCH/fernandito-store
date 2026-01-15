@@ -11,7 +11,7 @@ function Header(){
                     </div>
                 </Link>
 
-                <div className="flex-grow max-w-xl relative flex items-center">
+                {/* <div className="flex-grow max-w-xl relative flex items-center">
                     <input
                         type="text"
                         placeholder="Buscar en fernanditostore.com"
@@ -23,7 +23,7 @@ function Header(){
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
                     </button>
-                </div>
+                </div> */}
 
                 <div className="flex items-center gap-3 text-[#333333] flex-shrink-0">
                     <Link 
