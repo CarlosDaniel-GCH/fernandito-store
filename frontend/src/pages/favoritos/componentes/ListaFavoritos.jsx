@@ -61,10 +61,6 @@ function Favoritos(){
 
     return(
         <div className="max-w-[1440px] mx-auto p-6">
-            <h1 className="text-3xl font-black mb-8 border-b-4 border-[#add600] inline-block">
-                MIS FAVORITOS
-            </h1>
-
             {/* Mensaje */}
             {mensajeEliminado && (
                 <div className="fixed bottom-6 right-6 bg-white text-zinc-800 border-l-4 border-[#add600] p-4 rounded-lg shadow-lg transform transition-transform duration-300 ease-in-out opacity-90">
