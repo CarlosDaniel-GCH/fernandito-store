@@ -3,12 +3,10 @@ import React from 'react';
 function Footer(){
   return (
     <footer className="w-full bg-[#081f38] text-white pt-10 pb-6 mt-auto">
-      <div className="max-w-[1440px] mx-auto px-6">
+      <div className="mx-auto px-6">
         
-        {/* Sección Superior: Redes y Enlaces Legales */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-10">
           
-          {/* Redes Sociales */}
           <div className="flex gap-4">
             <a href="#" className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -24,7 +22,6 @@ function Footer(){
             </a>
           </div>
 
-          {/* Enlaces de Políticas */}
           <div className="grid grid-cols-2 md:flex md:flex-row gap-x-8 gap-y-4 text-sm font-medium">
             <a href="#" className="hover:underline decoration-[#add600] underline-offset-4">Términos y condiciones</a>
             <a href="#" className="hover:underline decoration-[#add600] underline-offset-4">Política de cookies</a>
@@ -33,10 +30,8 @@ function Footer(){
           </div>
         </div>
 
-        {/* Línea Divisora */}
         <hr className="border-white/10 mb-8" />
 
-        {/* Sección Inferior: Copyright y Dirección */}
         <div className="flex flex-col gap-1 text-[13px] text-white/70">
           <p className="font-bold text-white uppercase tracking-wider">
             © Todos los derechos reservados
